@@ -12,7 +12,9 @@ Damn Vulnerable Node Application (DVNA) is a Node.js web application that is dam
 
 ## Installation
 
-### Ubuntu 15.10 (Install git, a node version manager and the latest stable release)
+### Ubuntu 15.10
+
+Install git, a node version manager and the latest stable release
 
 ```
 sudo apt-get install git
