@@ -24,7 +24,7 @@ nvm install 5.3.0
 nvm use 5.3.0
 git clone https://github.com/quantumfoam/DVNA.git
 cd DVNA/
-npm install express
+npm install
 node vulnerabilities/command_injection.js
 navigate to http://localhost:6666/
 ```
