@@ -2,7 +2,7 @@
 
 ## Beta!
 
-This is very much beta software and is under active development. If you wanted to test out the vulnerabilities as they are now, make sure you have Express added as a dependency. A simple 'npm install' should grab all the requires, you could then try each issue by eg., $ node vulnerabilities/command_injection.js
+This is very much beta software and is under active development. If you wanted to test out the vulnerabilities as they are now, make sure you have Express added as a dependency.
 
 **Contributors wanted for UX/UI, bug fixes, and documentation.**
 - - -
@@ -12,7 +12,7 @@ Damn Vulnerable Node Application (DVNA) is a Node.js web application that is dam
 
 ## Installation
 
-Ubuntu 15.10 (Install git, a node version manager and the latest stable release)
+### Ubuntu 15.10 (Install git, a node version manager and the latest stable release)
 
 ```
 sudo apt-get install git
@@ -22,11 +22,12 @@ nvm install 5.3.0
 nvm use 5.3.0
 git clone https://github.com/quantumfoam/DVNA.git
 cd DVNA/
+npm install express
 node vulnerabilities/command_injection.js
 navigate to http://localhost:6666/
 ```
 
-Go read the source files and find out how to exploit each flaw!
+Go read the source files and find out how to exploit each flaw! not all the bugs require Express. At one point all the bugs will be under the same UI and be browsable with a hint system and information related to each bug class.
 
 *Note* Yes, this is tedious to have to be repeating for each issue class but at the moment I haven't added a UI template to browse challenges individually (coming soon!)
 - - -
