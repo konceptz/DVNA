@@ -1,0 +1,28 @@
+{
+  "name": "dvna",
+  "version": "0.1.0",
+  "description": "Damn Vulnerable Node Application",
+  "main": "dvna.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quantumfoam/DVNA.git"
+  },
+  "keywords": [
+    "Damn",
+    "Vulnerable",
+    "Node",
+    "Application"
+  ],
+  "author": "Claudio Lacayo <quantum@fibersphere.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quantumfoam/DVNA/issues"
+  },
+  "homepage": "https://github.com/quantumfoam/DVNA#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
