@@ -1,5 +1,7 @@
 // TODO: Tidy up this code by making use of the template and have some code flow reach this function and auto restart if a service failure is detected
-var dos = require('http');
+
+var express = require('express');
+var DVNA = express();
 
 function explodeNodeJS(p) {
   for (i = 1; i <= p; ++i) {
@@ -10,11 +12,16 @@ function explodeNodeJS(p) {
   }
 }
 
-dos.createServer(function(request, response) {
- explodeNodeJS(600000);
- explodeNodeJS(700000);
- explodeNodeJS(800000);
- explodeNodeJS(900000);
- }).listen(6666, '127.0.0.1');
+DVNA.get('/', function(req, res) {
+  explodeNodeJS(600000);
+  explodeNodeJS(700000);
+  explodeNodeJS(800000);
+  explodeNodeJS(900000);
 
-console.log('NodeJS DoS PoC || GTFO\n');
+  res.send('42');
+});
+
+module.exports = {
+  path: 'denial_of_service',
+  server: DVNA
+}
