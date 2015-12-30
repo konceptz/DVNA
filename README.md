@@ -25,8 +25,15 @@ nvm use 5.3.0
 git clone https://github.com/quantumfoam/DVNA.git
 cd DVNA/
 npm install
-node vulnerabilities/command_injection.js
+node dvna.js
 navigate to http://localhost:6666/
+```
+
+Your can start the server in another PORT with:
+
+```
+PORT=16666 node dvna.js
+navigate to http://localhost:16666/
 ```
 
 Go read the source files and find out how to exploit each flaw! not all the bugs require Express. At one point all the bugs will be under the same UI and be browsable with a hint system and information related to each bug class.
