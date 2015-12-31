@@ -1,12 +1,17 @@
-var http = require("http");
-var url = require("url");
 var exe = require("child_process");
-http.createServer(function(request, response){
-  var parsedUrl = url.parse(request.url, true);
-  response.writeHead(200, {"Content-Type" : "text/html"});
+var express = require('express');
+var DVNA = express();
+
+DVNA.get('/', function(req, res) {
+  res.writeHead(200, {"Content-Type" : "text/html"});
   exe.exec('id', function(err, data) {
-    response.write(":~/$ " + data);
+    res.write(":~/$ " + data);
     console.log(data);
-    response.end();
+    res.end();
   });
-}).listen(6666);
+});
+
+module.exports = {
+  path: 'command_injection',
+  server: DVNA
+}

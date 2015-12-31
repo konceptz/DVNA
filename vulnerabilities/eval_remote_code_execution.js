@@ -1,8 +1,14 @@
 // TODO: Player has to terminate the process; code should be added to monitor, reward, and restart service
-var e = require("express");
-var DVNA = e();
+
+var express = require('express');
+var DVNA = express();
+
 DVNA.get('/', function(req, res) {
   var res = eval("("+req.query.e+")");
   res.send('Parameter eval():<br> ' + res);
 });
-DVNA.listen(6666);
+
+module.exports = {
+  path: 'eval_remote_code_execution',
+  server: DVNA
+}

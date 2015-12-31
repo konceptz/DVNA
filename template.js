@@ -1,5 +1,11 @@
-var e = require("express");
-var DVNA = e();
+var express = require('express');
+var DVNA = express();
+
 DVNA.get('/', function(req, res) {
+  // Your example
 });
-DVNA.listen(6666);
+
+module.exports = {
+  path: '<name>',
+  server: DVNA
+}

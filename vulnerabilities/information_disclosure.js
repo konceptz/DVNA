@@ -1,11 +1,12 @@
 // By default you should see the connect.sid header value
-var e = require("express");
-var DVNA = e();
+
+var express = require('express');
+var DVNA = express();
+
 DVNA.get('/', function(req, res) {
   // When using just Express we can disable the header values with this setting
   app.disable("x-powered-by");
 });
-DVNA.listen(6666);
 
 // When using helmet.js the option to prevent information disclosure in header values is
 // app.use(helmet.hidePoweredBy));
@@ -25,3 +26,8 @@ DVNA.listen(6666);
 // if (process.env.NODE_ENV === 'development') {
 //   DVNA.use(errorhandler);
 // }
+
+module.exports = {
+  path: 'information_disclousure',
+  server: DVNA
+}
