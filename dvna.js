@@ -2,6 +2,7 @@ var ws = require('ws');
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
+var md = require('marked');
 
 var DVNA = express();
 var port = process.env.PORT || 6666;
@@ -12,19 +13,30 @@ var attacker_port = process.env.ATTACKER_PORT || 6667;
 var vulnerabilities = [];
 var vulnerabilities_path = './vulnerabilities/';
 
-fs.readdir(vulnerabilities_path, function (err, files) {
+fs.readdir(vulnerabilities_path, function (err, folders) {
   if (err) {
     throw err;
   }
 
-  files.map(function (file) {
-    return path.join(vulnerabilities_path, file);
-  }).filter(function (file) {
-    return fs.statSync(file).isFile();
-  }).forEach(function (file) {
-    var plugin_path = vulnerabilities_path + path.basename(file, '.js');
-    console.log("Loading vulnerability '%s'...",  plugin_path);
-    var vulnerability = require(plugin_path);
+  DVNA.set('vulnerabilities', vulnerabilities);
+
+  folders.map(function (folder) {
+    return path.join(vulnerabilities_path, folder);
+  }).filter(function (folder) {
+    return !fs.statSync(folder).isFile();
+  }).forEach(function (folder) {
+    console.log("Loading vulnerability '%s'...",  folder);
+
+    var vulnerability_path = path.join(folder, 'vulnerability.js');
+    var challenge_path = path.join(folder, 'challenge.md');
+    var hint_path = path.join(folder, 'hint.md');
+
+    var vulnerability = require('./' + vulnerability_path);
+    var challenge = fs.readFileSync(challenge_path, 'utf8');
+    var hint = fs.readFileSync(hint_path, 'utf8');
+
+    vulnerability.challenge = challenge;
+    vulnerability.hint = hint;
 
     vulnerabilities.push(vulnerability);
 
@@ -41,6 +53,7 @@ fs.readdir(vulnerabilities_path, function (err, files) {
 });
 
 DVNA.set('view engine', 'jade');
+DVNA.use('/assets', express.static('public'));
 
 DVNA.get('/', function (req, res) {
   var data = {
@@ -48,7 +61,19 @@ DVNA.get('/', function (req, res) {
   };
 
   res.render('dvna', data);
-})
+});
+
+DVNA.locals.md = md;
+
+DVNA.get('/:vulnerability/challenge', function (req, res) {
+  var vulnerability = req.app.set('vulnerabilities').filter(function (vulnerability) {
+    return vulnerability.path  === req.params.vulnerability;
+  })[0];
+
+  res.render('vulnerability', {
+    challenge: vulnerability.challenge
+  });
+});
 
 attacker.set('port', attacker_port);
 attacker.listen(attacker_port);

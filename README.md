@@ -1,4 +1,4 @@
-![DVNA logo](https://github.com/quantumfoam/DVNA/blob/master/dvna.jpg)
+![DVNA logo](https://github.com/quantumfoam/DVNA/blob/master/public/images/dvna.png)
 
 ## Beta!
 
