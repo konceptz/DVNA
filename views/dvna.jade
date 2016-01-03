@@ -13,7 +13,8 @@ block content
 
   each vulnerability in vulnerabilities
     h2= vulnerability.title
-    a(href= vulnerability.path + '/challenge/') Challange
+    a(href= vulnerability.path + '/challenge/') Challenge
+    span= 'Passed: ' + (!!vulnerability.passed)
 
     p=vulnerability.description
 

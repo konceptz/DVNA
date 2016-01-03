@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/quantumfoam/DVNA#readme",
   "dependencies": {
+    "body-parser": "^1.14.2",
     "crypto": "0.0.3",
     "express": "^4.13.3",
     "jade": "^1.11.0",
