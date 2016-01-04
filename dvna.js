@@ -7,9 +7,6 @@ var md = require('marked');
 var DVNA = express();
 var port = process.env.PORT || 6666;
 
-var attacker = express();
-var attacker_port = process.env.ATTACKER_PORT || 6667;
-
 var vulnerabilities = [];
 var vulnerabilities_path = './vulnerabilities/';
 
@@ -44,11 +41,6 @@ fs.readdir(vulnerabilities_path, function (err, folders) {
       console.log("Mounting it in '/%s'...",  vulnerability.path);
       DVNA.use('/' + vulnerability.path, vulnerability.server);
     }
-
-    if (vulnerability.attacker) {
-      console.log("Mounting attacker in '/%s'...",  vulnerability.path);
-      attacker.use('/' + vulnerability.path, vulnerability.attacker);
-    }
   });
 });
 
@@ -74,9 +66,6 @@ DVNA.get('/:vulnerability/challenge', function (req, res) {
     challenge: vulnerability.challenge
   });
 });
-
-attacker.set('port', attacker_port);
-attacker.listen(attacker_port);
 
 DVNA.set('port', port);
 DVNA.listen(port, function welcome () {
