@@ -25,6 +25,7 @@
   "dependencies": {
     "express": "^4.13.3",
     "jade": "^1.11.0",
-    "sqlite3": "^3.1.1"
+    "sqlite3": "^3.1.1",
+    "ws": "^1.0.1"
   }
 }

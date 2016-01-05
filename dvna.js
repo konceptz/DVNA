@@ -1,3 +1,4 @@
+var ws = require('ws');
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
@@ -6,7 +7,7 @@ var DVNA = express();
 var port = process.env.PORT || 6666;
 
 var attacker = express();
-var attacker_port = process.env.ATACKER_PORT || 6667;
+var attacker_port = process.env.ATTACKER_PORT || 6667;
 
 var vulnerabilities = [];
 var vulnerabilities_path = './vulnerabilities/';
