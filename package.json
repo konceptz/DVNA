@@ -17,7 +17,7 @@
     "Application"
   ],
   "author": "Claudio Lacayo <quantum@fibersphere.net>",
-  "license": "GNU",
+  "license": "GPL-2.0+",
   "bugs": {
     "url": "https://github.com/quantumfoam/DVNA/issues"
   },
