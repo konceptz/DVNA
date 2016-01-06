@@ -17,15 +17,18 @@
     "Application"
   ],
   "author": "Claudio Lacayo <quantum@fibersphere.net>",
-  "license": "MIT",
+  "license": "GNU",
   "bugs": {
     "url": "https://github.com/quantumfoam/DVNA/issues"
   },
   "homepage": "https://github.com/quantumfoam/DVNA#readme",
   "dependencies": {
+    "body-parser": "^1.14.2",
+    "crypto": "0.0.3",
     "express": "^4.13.3",
     "jade": "^1.11.0",
     "sqlite3": "^3.1.1",
-    "ws": "^1.0.1"
+    "ws": "^1.0.1",
+    "marked": "^0.3.5"
   }
 }

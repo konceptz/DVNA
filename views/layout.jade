@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='chrome=1')
+
+    title Damn Vulnerable Node Application
+
+    link(rel='stylesheet', href='/assets/stylesheets/styles.css')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/monokai-sublime.min.css')
+    link(href='//fonts.googleapis.com/css?family=Open+Sans:600italic,600,300italic,300', rel='stylesheet', type='text/css')
+
+    //if lt IE 9
+      script(src='//html5shiv.googlecode.com/svn/trunk/html5.js')
+
+    script(src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.min.js')
+    script.
+      hljs.initHighlightingOnLoad();
+
+    meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=no')
+  body
+    #header
+      .wrapper
+        a.btn(href='https://github.com/quantumfoam/DVNA', target='_blank') View On GitHub
+        ul.nav
+    // end header
+    .wrapper
+      section
+        #title
+          a.nolink(href='/')
+            img(src='/assets/images/dvna.png', width=250)
+
+          h1 Damn Vulnerable Node Application
+          h5 DVNA is a Node.js web application that is damn vulnerable
+
+          block subheader
+
+        block content
