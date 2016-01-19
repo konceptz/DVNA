@@ -2,9 +2,7 @@
 
 ## Beta!
 
-This is very much beta software and is under active development. If you wanted to test out the vulnerabilities as they are now, make sure you have Express added as a dependency.
-
-**Contributors wanted for UX/UI, bug fixes, and documentation.**
+Under active development. **Contributors wanted for UX/UI, bug fixes, and documentation.**
 - - -
 
 Damn Vulnerable Node Application (DVNA) is a Node.js web application that is damn vulnerable. Its intended purpose is to teach secure coding concepts to web developers who use Node, and to explore web application vulnerabilities in a controlled class environment or to serve as a cyber range for capture the flag events. It's loaded with **common web vulnerabilities** and **various levels of complexity.**
@@ -30,15 +28,13 @@ navigate to http://localhost:6666/
 ```
 
 Your can start the server in another PORT with:
-
 ```
 PORT=16666 node dvna.js
 navigate to http://localhost:16666/
 ```
+*Note* Changing the port is only required if you are not using Firefox as both Safari and Chrome restrict the default port assignment.
 
-Go read the source files and find out how to exploit each flaw! not all the bugs require Express. At one point all the bugs will be under the same UI and be browsable with a hint system and information related to each bug class.
-
-*Note* Yes, this is tedious to have to be repeating for each issue class but at the moment I haven't added a UI template to browse challenges individually (coming soon!)
+Go read the source files and find out how to exploit each flaw!
 - - -
 
 ## Disclaimer
