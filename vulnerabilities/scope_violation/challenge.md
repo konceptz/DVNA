@@ -8,17 +8,17 @@ By default, variables are global. Omit the var keyword and you declare a global 
 ### Vulnerable Code View
 ```
 var i = 0;
-
-function handler() {
-  i = 10;
-}
-
-function iterate() {
-  for (i = 0; i < 10; i++) {
-    console.log(i);
-    iterate();
-    console.log(i);
+  function containsGlobalVariable() {
+    i = 256;
   }
-}
+
+  function determineGlobalVariable() {
+    for (i = 0; i < 10; i++) {
+      console.log(i);
+      containsGlobalVariable();
+      console.log(i);
+    }
+  }
+  console.log(determineGlobalVariable());
 })
 ```

@@ -3,29 +3,29 @@ extends layout
 block subheader
   hr
   span.credits.left
-    | Project maintained by 
-    a(href='https://github.com/quantumfoam', target='_blank') quantumfoam
+    | Project maintained by
+    a(href='https://github.com/quantumfoam', target='_blank')  quantumfoam
   span.credits.right This project is released under the terms of the GNU License
 
 block content
   p
-    | Go read the source files and find out how to exploit each flaw! not all the bugs require Express. At one point all the bugs will be under the same UI and be browsable with a hint system and information related to each bug class.
+    |  Click on the challenge link to start learning about each vulnerability and attempt to exploit each bug class. Each vulnerability contains vulnerable sample code, hints, and an input box for submitting a challenge token to demonstrate an understanding of the issue.
 
   each vulnerability in vulnerabilities
     h2= vulnerability.title
     a(href= vulnerability.path + '/challenge/') Challenge
-    span= 'Passed: ' + (!!vulnerability.passed)
+    span= ' Completed: ' + (!!vulnerability.passed)
 
     p=vulnerability.description
 
   h2 How to contribute?
 
   p
-    | Inline code would look a little different. 
+    | Inline code would look a little different.
     code We want you to see
-    |  where it is, but its going to be a little less noticeable. It might also be as simple as 
+    |  where it is, but its going to be a little less noticeable. It might also be as simple as
     code :hover
-    |  and as unique as 
+    |  and as unique as
     code :first-child
     | . It is up to you.
 
