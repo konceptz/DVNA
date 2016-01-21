@@ -3,7 +3,6 @@ var ws = require('ws'),
     path = require('path'),
     express = require('express'),
     md = require('marked'),
-    proc = require('process'),
     bodyParser = require('body-parser');
 
 // Server configuration
