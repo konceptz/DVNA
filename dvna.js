@@ -1,57 +1,61 @@
-var ws = require('ws'),
-    fs = require('fs'),
-    path = require('path'),
-    express = require('express'),
-    md = require('marked'),
-    bodyParser = require('body-parser');
+var ws = require('ws');
+var fs = require('fs');
+var path = require('path');
+var express = require('express');
+var md = require('marked');
+var bodyParser = require('body-parser');
 
-// Server configuration
+var challenge_token = require('./lib/challenge_token');
+
 var DVNA = express();
 var port = process.env.PORT || 6666;
-var mode = process.env.MODE || 'training';
+
 var vulnerabilities = [];
 var vulnerabilities_path = './vulnerabilities/';
-var challenge_token = require('./lib/challenge_token');
-DVNA.set('view engine', 'jade');
-DVNA.set('vulnerabilities', vulnerabilities);
-DVNA.use('/assets', express.static('public'));
-DVNA.use(bodyParser.urlencoded({ extended: true }));
 
 fs.readdir(vulnerabilities_path, function (err, folders) {
   if (err) {
     throw err;
   }
 
+  DVNA.set('vulnerabilities', vulnerabilities);
+
   folders.map(function (folder) {
     return path.join(vulnerabilities_path, folder);
   }).filter(function (folder) {
     return !fs.statSync(folder).isFile();
   }).forEach(function (folder) {
-    console.log("[Loaded challenge] <=> '%s'", folder);
+    console.log("Loading vulnerability '%s'...",  folder);
 
-  var vulnerability_id = path.basename(folder);
-  var vulnerability_path = path.join(folder, 'vulnerability.js');
-  var vulnerability = require('./' + vulnerability_path);
-  var challenge_path = path.join(folder, 'challenge.md');
-  var challenge = fs.readFileSync(challenge_path, 'utf8');
-  var hint_path = path.join(folder, 'hint.md');
-  var hint = fs.readFileSync(hint_path, 'utf8');
+    var vulnerability_id = path.basename(folder);
+    var vulnerability_path = path.join(folder, 'vulnerability.js');
+    var challenge_path = path.join(folder, 'challenge.md');
+    var hint_path = path.join(folder, 'hint.md');
 
-  vulnerability.id = vulnerability_id;
-  vulnerability.path = vulnerability_id;
-  vulnerability.challenge = challenge;
-  vulnerability.hint = hint;
+    var vulnerability = require('./' + vulnerability_path);
+    var challenge = fs.readFileSync(challenge_path, 'utf8');
+    var hint = fs.readFileSync(hint_path, 'utf8');
 
-  // console.log("Generating challenge token for '%s'...",  vulnerability.id);
-  vulnerability.challenge_token = challenge_token(vulnerability.id);
-  vulnerabilities.push(vulnerability);
+    vulnerability.id = vulnerability_id;
+    vulnerability.path = vulnerability_id;
+    vulnerability.challenge = challenge;
+    vulnerability.hint = hint;
 
-  if (true) {
-    // console.log("Mounting it in '/%s'...",  vulnerability.path);
-    DVNA.use('/' + vulnerability.path, vulnerability.server);
+    console.log("Generating challenge token for '%s'...",  vulnerability.id);
+    vulnerability.challenge_token = challenge_token(vulnerability.id);
+
+    vulnerabilities.push(vulnerability);
+
+    if (vulnerability.server) {
+      console.log("Mounting it in '/%s'...",  vulnerability.path);
+      DVNA.use('/' + vulnerability.path, vulnerability.server);
     }
   });
 });
+
+DVNA.set('view engine', 'jade');
+DVNA.use('/assets', express.static('public'));
+DVNA.use(bodyParser.urlencoded({ extended: true }));
 
 DVNA.get('/', function (req, res) {
   var data = {
@@ -81,11 +85,12 @@ DVNA.post('/:vulnerability/challenge', function (req, res) {
   if (req.body.challenge_token === vulnerability.challenge_token) {
     vulnerability.passed = true;
   }
+
   res.redirect('/');
 });
 
 DVNA.set('port', port);
-DVNA.listen(process.port, function welcome () {
+DVNA.listen(port, function welcome () {
   console.log("   ______            _        _______ ");
   console.log("  (  __  \\ |\\     /|( (    /|(  ___  )");
   console.log("  | (  \\  )| )   ( ||  \\  ( || (   ) |");
@@ -98,5 +103,5 @@ DVNA.listen(process.port, function welcome () {
   console.log("\r\n   Damn Vulnerable Node Application ");
 
   console.log("  https://github.com/quantumfoam/DVNA \r\n");
-  console.log("DVNA listening at: https://127.0.0.1:" + port + "/\n");
+  console.log("DVNA listening at: https://127.0.0.1:" + port + "/");
 });
