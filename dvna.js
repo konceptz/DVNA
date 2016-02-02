@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var challenge_token = require('./lib/challenge_token');
 
 var DVNA = express();
-var port = process.env.PORT || 6666;
+var port = process.env.PORT || 3000;
 
 var vulnerabilities = [];
 var vulnerabilities_path = './vulnerabilities/';
@@ -103,5 +103,5 @@ DVNA.listen(port, function welcome () {
   console.log("\r\n   Damn Vulnerable Node Application ");
 
   console.log("  https://github.com/quantumfoam/DVNA \r\n");
-  console.log("DVNA listening at: https://127.0.0.1:" + port + "/");
+  console.log("DVNA listening at: http://127.0.0.1:" + port + "/");
 });

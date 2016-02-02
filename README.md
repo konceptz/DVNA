@@ -22,6 +22,7 @@ nvm install 5.3.0
 nvm use 5.3.0
 git clone https://github.com/quantumfoam/DVNA.git
 cd DVNA/
+npm set progress=false
 npm install
 node dvna.js
 navigate to http://localhost:6666/
