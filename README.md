@@ -25,15 +25,8 @@ cd DVNA/
 npm set progress=false
 npm install
 node dvna.js
-navigate to http://localhost:6666/
+navigate to http://localhost:3000/
 ```
-
-Your can start the server in another PORT with:
-```
-PORT=16666 node dvna.js
-navigate to http://localhost:16666/
-```
-*Note* Changing the port is only required if you are not using Firefox as both Safari and Chrome restrict the default port assignment.
 
 Go read the source files and find out how to exploit each flaw!
 - - -
