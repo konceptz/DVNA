@@ -3,6 +3,7 @@ var ws = require('ws'),
     path = require('path'),
     express = require('express'),
     md = require('marked'),
+    morgan = require('morgan'),
     bodyParser = require('body-parser');
 
 var challenge_token = require('./lib/challenge_token');
@@ -19,13 +20,12 @@ fs.readdir(vulnerabilities_path, function (err, folders) {
   }
 
   DVNA.set('vulnerabilities', vulnerabilities);
-  console.log('\n');
   folders.map(function (folder) {
     return path.join(vulnerabilities_path, folder);
   }).filter(function (folder) {
     return !fs.statSync(folder).isFile();
   }).forEach(function (folder) {
-    console.log("[+] Loaded challenge <=> '%s'...",  folder);
+    console.log("[+] Loaded challenge '%s'...",  folder);
 
     var vulnerability_id = path.basename(folder);
     var vulnerability_path = path.join(folder, 'vulnerability.js');
@@ -51,11 +51,30 @@ fs.readdir(vulnerabilities_path, function (err, folders) {
       DVNA.use('/' + vulnerability.path, vulnerability.server);
     }
   });
+  console.log('\nPress ctrl+c to shutdown the server');
+
 });
 
 DVNA.set('view engine', 'jade');
 DVNA.use('/assets', express.static('public'));
 DVNA.use(bodyParser.urlencoded({ extended: true }));
+
+/**
+ * Setup HTTP Strict Transport Security header
+ */
+//DVNA.use(function (request, response, next) {
+//  var year = 60 * 60 * 24 * 365;
+//  response.set('Strict-Transport-Security', 'max-age',  + year + ';includeSubDomains');
+//  next();
+//})
+
+/**
+ * Enable logging library
+ */
+//var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'});
+//DVNA.use(morgan('combined', {stream: accessLogStream}));
+
+DVNA.use(morgan('combined'));
 
 DVNA.get('/', function (req, res) {
   var data = {
@@ -103,5 +122,5 @@ DVNA.listen(port, function welcome () {
   console.log("\r\n   Damn Vulnerable Node Application ");
 
   console.log("  https://github.com/quantumfoam/DVNA \r\n");
-  console.log("DVNA listening at: http://127.0.0.1:" + port + "/");
+  console.log("DVNA listening at: http://127.0.0.1:" + port + "/\n");
 });
