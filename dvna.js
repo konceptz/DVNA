@@ -52,7 +52,6 @@ fs.readdir(vulnerabilities_path, function (err, folders) {
     }
   });
   console.log('\nPress ctrl+c to shutdown the server');
-
 });
 
 DVNA.set('view engine', 'jade');
