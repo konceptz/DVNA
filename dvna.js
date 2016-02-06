@@ -1,9 +1,9 @@
-var ws = require('ws');
-var fs = require('fs');
-var path = require('path');
-var express = require('express');
-var md = require('marked');
-var bodyParser = require('body-parser');
+var ws = require('ws'),
+    fs = require('fs'),
+    path = require('path'),
+    express = require('express'),
+    md = require('marked'),
+    bodyParser = require('body-parser');
 
 var challenge_token = require('./lib/challenge_token');
 
@@ -19,13 +19,13 @@ fs.readdir(vulnerabilities_path, function (err, folders) {
   }
 
   DVNA.set('vulnerabilities', vulnerabilities);
-
+  console.log('\n');
   folders.map(function (folder) {
     return path.join(vulnerabilities_path, folder);
   }).filter(function (folder) {
     return !fs.statSync(folder).isFile();
   }).forEach(function (folder) {
-    console.log("Loading vulnerability '%s'...",  folder);
+    console.log("[+] Loaded challenge <=> '%s'...",  folder);
 
     var vulnerability_id = path.basename(folder);
     var vulnerability_path = path.join(folder, 'vulnerability.js');
@@ -41,13 +41,13 @@ fs.readdir(vulnerabilities_path, function (err, folders) {
     vulnerability.challenge = challenge;
     vulnerability.hint = hint;
 
-    console.log("Generating challenge token for '%s'...",  vulnerability.id);
+    //console.log("Generating challenge token for '%s'...",  vulnerability.id);
     vulnerability.challenge_token = challenge_token(vulnerability.id);
 
     vulnerabilities.push(vulnerability);
 
     if (vulnerability.server) {
-      console.log("Mounting it in '/%s'...",  vulnerability.path);
+      //console.log("Mounting it in '/%s'...",  vulnerability.path);
       DVNA.use('/' + vulnerability.path, vulnerability.server);
     }
   });

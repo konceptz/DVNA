@@ -44,7 +44,7 @@ if(isAuthorized() == false) {
 * This check will pass because 'undefined' is falsy, as a result a user who isn't authorized is able to login.
 */
 if (!isAuthorized()){
-  console.log('you\'ve accessed a restricted area.');
+  console.log('You\'ve accessed a restricted area.');
 };
 
 ```
