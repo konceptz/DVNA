@@ -2,6 +2,8 @@
 
 ## Beta!
 
+[![Join the chat at https://gitter.im/quantumfoam/DVNA](https://badges.gitter.im/quantumfoam/DVNA.svg)](https://gitter.im/quantumfoam/DVNA?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Under active development. **Contributors wanted for UX/UI, bug fixes, and documentation.**
 - - -
 
