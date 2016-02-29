@@ -1,22 +1,41 @@
-## Regexp DOS
+## Regex DoS (ReDoS)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar feugiat pharetra. Mauris sodales nec elit eget cursus. Quisque posuere sit amet ante in aliquet. Proin id fermentum lorem. Integer condimentum suscipit felis sit amet pellentesque. Nam lacinia lacus quis ipsum molestie, vitae rutrum lacus maximus. Duis libero nunc, blandit ut leo vel, tincidunt mollis magna. Donec egestas egestas quam eu rhoncus. Cras facilisis mauris lectus, a sagittis tellus rutrum vitae. Quisque vestibulum lectus et justo ultricies, in tristique velit maximus. Ut dictum venenatis pretium. Proin vehicula quam ac mi luctus, at aliquet velit laoreet. Donec metus lacus, imperdiet et orci id, egestas euismod nibh.
+A Denial of Service (DoS) attack attempts to interrupt users access to a site, application, or server. There are many types of DoS attacks but this attack specifically looks to exploit Regular Expression.
 
-- Item 1
-- Item 2
-- Item 3
+You can find yourself in a vulnerable position when using regular expressions that contain certain evil regex patterns (shown below). This is because the evil regex patterns allow for many possible matches. The regex engine will attempt to match the input value to the regex pattern with every possible combination before completing. So, as an invalid input value increases in size, the longer the regex engine will take to process before it determines there is no match.  
 
+An **Evil Regex** can get stuck on crafted inputed. Evil Regex contains patterns such as:
+- Grouping with repetition
+- Repetition inside the repeated group
+- Alternation with overlapping inside the repeated group
+
+Examples of Evil Regex:
+- `(a+)+`
+- `([a-zA-Z]+)*`
+- `(a|aa)+`
+- `(a|a?)+`
+- `(.*a){x} | for x > 10`
+
+All the above are susceptible to the input: `aaaaaaaaaaaaaaaaaaaaaaaa!`
+
+### Defenses
+
+- Understand that Regex algorithms can be written in an efficient way.
+- Avoid using **Evil Regex** patterns. For example, `(.*a){x}` can be rewritten to `([^a]*a){x,}`.
+- Check out common validations on [OWASP](https://www.owasp.org/index.php/OWASP_Validation_Regex_Repository)
+
+### Vulnerable Code View
 
 ```
-   var express = require('express');
-   var DVNA = express();
+function validateInputFormat(string) {
+var inputExpression = /^((ab)*)+$/;
+return inputExpression.test(string);
+}
 
-   DVNA.get('/', function(req, res) {
-     // Your example
-   });
+var input = "ababababababababababababababababababababababababababababa"
 
-   module.exports = {
-     title: 'name',
-     server: DVNA
-   }
+var start = process.hrtime();
+
+console.log(validateInputFormat(input));
+console.log(process.hrtime(start));
 ```
