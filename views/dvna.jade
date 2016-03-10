@@ -10,7 +10,9 @@ block subheader
 
 block content
   p
-    |  Click on the challenge link to start learning about each vulnerability and attempt to exploit each bug class. Each vulnerability contains vulnerable sample code, hints, and an input box for submitting a challenge token to demonstrate an understanding of the issue.
+    |  Secure Mode: A secure coding platform that teaches developers about security flaws in a Node environment. Click on the challenge link to start learning about each vulnerability and bug class. Each vulnerability contains vulnerable sample code, hints and defenses. Click on the complete button to set a challenge as done.
+  p
+    |  Challenge Mode: Use this mode to explore all the vulnerabilities covered in Secure Mode. This mode is currently unavailable until future releases.
 
   each vulnerability in vulnerabilities
     h2= vulnerability.title
