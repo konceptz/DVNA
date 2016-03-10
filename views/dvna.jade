@@ -10,10 +10,12 @@ block subheader
 
 block content
   p
-    |  Secure Mode: A secure coding mode that teaches developers about security flaws in a Node environment. Click on the challenge link to start learning about each vulnerability and bug class. Each vulnerability contains vulnerable sample code, hints and defenses. Click on the "Mark Complete" button to set a challenge as done.
+    |  Learning Mode: A secure coding mode that teaches developers about security flaws in a Node environment. Click on the challenge link to start learning about each vulnerability and bug class. Each vulnerability contains vulnerable sample code, hints and defenses. Click on the "Mark Complete" button to set a challenge as done.
   p
-    |  Challenge Mode: Use this mode to explore all the vulnerabilities covered in Secure Mode. This mode is currently unavailable until future releases.
-
+    |  Challenge Mode: Use this mode to explore all the vulnerabilities covered in Learning Mode. This mode will load the vulnerable Node application and allow you to start hunting for flaws.
+  p
+    a(style={color: 'white'})  Challenge Mode is currently in development and will not be available until future releases.
+  
   each vulnerability in vulnerabilities
     h2= vulnerability.title
     a(href= vulnerability.path + '/challenge/') Challenge
@@ -21,51 +23,20 @@ block content
 
     p=vulnerability.description
 
-  h2 How to contribute?
-
+  h2 Contributing
   p
-    | Inline code would look a little different.
-    code We want you to see
-    |  where it is, but its going to be a little less noticeable. It might also be as simple as
-    code :hover
-    |  and as unique as
-    code :first-child
-    | . It is up to you.
-
-  .highlight
-    pre
-      code(class='javascript').
-        var express = require('express');
-        var DVNA = express();
-
-        DVNA.get('/', function(req, res) {
-          // Your example
-        });
-
-        module.exports = {
-          title: 'name',
-          server: DVNA
-        }
-  :markdown
-    ## Disclaimer
-
-    We do not take responsibility for the way in which any one uses this application (DVNA). We have made the purposes of the application clear and it should not be used maliciously. We have given warnings and taken measures to prevent users from installing DVNA on to live web servers. If your web server is compromised via an installation of DVNA it is not our responsibility it is the responsibility of the person/s who uploaded and installed it.
-
-    - - -
-
-    ## License
-
-    This file is part of Damn Vulnerable Node Application (DVNA).
-
-    Damn Vulnerable Node Application (DVNA) is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Damn Vulnerable Node Application (DVNA) is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Damn Vulnerable Node Application (DVNA).  If not, see http://www.gnu.org/licenses/.
+    | Create a new folder under the
+    code vulnerabilities/
+    | folder path and name it the security flaw you are contributing. Copy the files
+    code challenge.md
+    code hint.md
+    code vulnerability.js
+    | from the fully completed
+    code vulnerabilities/scope_violation/
+    | challenge. Follow the same format these files contain. Each
+    code challenge.md
+    | should contain a clear technical detailed description of the vulnerability, defenses, and a vulnerable code snippet. Each
+    code hint.md
+    | file should contain additional resources or hints for completing a challenge. Finally, the
+    code vulnerability.js
+    | file should contain all the necessary code that will be used in "Challenge Mode" and exposed in the vulnerable Node application. Contributions that do not follow these guidelines will be rejected.
