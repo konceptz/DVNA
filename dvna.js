@@ -107,6 +107,19 @@ DVNA.post('/:vulnerability/challenge', function (req, res) {
   res.redirect('/');
 });
 
+
+DVNA.get('/vulnerable', function(req, res){
+  try {
+    debugger
+    var filePath = p.join(__dirname, '/' + req.query.traverse);
+    var readStream = fs.createReadStream(filePath);
+    readStream.pipe(res);
+  } catch (e) {
+    res.send(404);
+    console.log('File not found');
+  }
+});
+
 DVNA.set('port', port);
 DVNA.listen(port, function welcome () {
   console.log("   ______            _        _______ ");
