@@ -2,20 +2,15 @@ extends layout
 
 block subheader
   hr
-  span.credits.center
-    | Project maintained by
-    a(href='https://github.com/quantumfoam', target='_blank')  quantumfoam
-    |  with contributions from some awesome
-    a(href='https://github.com/quantumfoam/DVNA/graphs/contributors', target='_blank')  developers
-
+  
 block content
   p
-    |  Learning Mode: A secure coding mode that teaches developers about security flaws in a Node environment. Click on the challenge link to start learning about each vulnerability and bug class. Each vulnerability contains vulnerable sample code, hints and defenses. Click on the "Mark Complete" button to set a challenge as done.
+  | Learning Mode: A secure coding mode that teaches developers about security flaws in a Node environment. Click on the challenge link to start learning about each vulnerability and bug class. Each vulnerability contains vulnerable sample code, hints and defenses. Click on the "Mark Complete" button to set a challenge as done.
   p
-    |  Challenge Mode: Use this mode to explore all the vulnerabilities covered in Learning Mode. This mode will load the vulnerable Node application and allow you to start hunting for flaws.
+  |  Challenge Mode: Use this mode to explore all the vulnerabilities covered in Learning Mode. This mode will load the vulnerable Node application and allow you to start hunting for flaws.
   p
-    a(style={color: 'white'})  Challenge Mode is currently in development and will not be available until future releases.
-  
+  a(style={color: 'white'})  Challenge Mode is currently in development and will not be available until future releases.
+
   each vulnerability in vulnerabilities
     h2= vulnerability.title
     a(href= vulnerability.path + '/challenge/') Challenge
@@ -40,3 +35,10 @@ block content
     | file should contain additional resources or hints for completing a challenge. Finally, the
     code vulnerability.js
     | file should contain all the necessary code that will be used in "Challenge Mode" and exposed in the vulnerable Node application. Contributions that do not follow these guidelines will be rejected.
+
+    hr
+    span.credits.center
+      | Project maintained by
+      a(href='https://github.com/quantumfoam', target='_blank')  quantumfoam
+      |  with contributions from some awesome
+      a(href='https://github.com/quantumfoam/DVNA/graphs/contributors', target='_blank')  developers
