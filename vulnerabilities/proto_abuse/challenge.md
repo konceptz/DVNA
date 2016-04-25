@@ -9,14 +9,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar feugia
 
 ```
    var express = require('express');
-   var DVNA = express();
+   var dvna = express();
 
-   DVNA.get('/', function(req, res) {
+   dvna.get('/', function(req, res) {
      // Your example
    });
 
    module.exports = {
      title: 'name',
-     server: DVNA
+     server: dvna
    }
 ```

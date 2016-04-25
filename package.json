@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/quantumfoam/DVNA.git"
+    "url": "git+https://github.com/quantumfoam/dvna.git"
   },
   "keywords": [
     "Damn",
@@ -19,9 +19,9 @@
   "author": "Claudio Lacayo <quantum@fibersphere.net>",
   "license": "GPL-2.0+",
   "bugs": {
-    "url": "https://github.com/quantumfoam/DVNA/issues"
+    "url": "https://github.com/quantumfoam/dvna/issues"
   },
-  "homepage": "https://github.com/quantumfoam/DVNA#readme",
+  "homepage": "https://github.com/quantumfoam/dvna#readme",
   "dependencies": {
     "body-parser": "^1.14.2",
     "crypto": "0.0.3",
