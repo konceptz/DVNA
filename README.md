@@ -31,5 +31,4 @@ Go read the source files and find out how to exploit each flaw!
 - - -
 
 ## License
-
-[![GNU GPL](http://www.gnu.org/licenses/)]
+[GNU GPL](http://www.gnu.org/licenses/)
